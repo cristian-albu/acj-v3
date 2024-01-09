@@ -8,7 +8,7 @@ Following structure for hardcoded data must be followed
 export const relevantIdentifier_data = {};
 ```
 
-2. A `type` must be declared or used alongside the exported data
+2. An existing type must be used or a new `type` must be declared alongside the exported data
 
 ```ts
 export type T_PetsData = string[];
