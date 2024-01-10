@@ -1,4 +1,5 @@
 "use server";
+import { getPostData, getSlugs } from "@/lib/queries";
 import PostView from "@/views/blog-view/PostView";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -10,14 +11,6 @@ export type T_PostData = {
 
 export type T_PostProps = {
     data: T_PostData;
-};
-
-export const getSlugs = async () => {
-    return ["slug-1", "slug-2"];
-};
-
-export const getPostData = async (slug: string) => {
-    return { title: "title", content: "content" };
 };
 
 // This pre-generates the static paths for the blog posts at BUILD TIME!!!

@@ -1,4 +1,5 @@
 "use server";
+import { getProjectData, getSlugs } from "@/lib/queries";
 import ProjectView from "@/views/projects-view/ProjectView";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -10,14 +11,6 @@ export type T_ProjectData = {
 
 export type T_ProjectProps = {
     data: T_ProjectData;
-};
-
-export const getSlugs = async () => {
-    return ["slug-1", "slug-2"];
-};
-
-export const getProjectData = async (slug: string) => {
-    return { title: "title", content: "content" };
 };
 
 // This pre-generates the static paths for the blog posts at BUILD TIME!!!
