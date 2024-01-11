@@ -4,6 +4,7 @@ import "./globals.css";
 import StyledComponentsRegistry from "@/lib/registry";
 import NavBar from "@/shared/navigation/NavBar";
 import Footer from "@/shared/navigation/Footer";
+import { navbar_data } from "@/data/navigation-data";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={inter.className}>
                 <StyledComponentsRegistry>
-                    <NavBar />
+                    <NavBar data={navbar_data} />
                     {children}
                     <Footer />
                 </StyledComponentsRegistry>

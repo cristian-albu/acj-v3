@@ -3,57 +3,11 @@ import useWindowDimensions from "@/lib/utils/useWindowDimensions";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import {
-    HiOutlineMenuAlt1,
-    HiOutlineHome,
-    HiOutlineUser,
-    HiOutlineNewspaper,
-    HiOutlineDesktopComputer,
-    HiOutlinePhotograph,
-    HiOutlineMail,
-} from "react-icons/hi";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { Nav, NavList, NavListButton, NavListItem } from "./styled";
+import { T_NavbarData } from "@/data/navigation-data";
 
-type T_NavbarData = {
-    title: string;
-    link: string;
-    icon?: React.ReactElement;
-};
-
-const navbar_data: T_NavbarData[] = [
-    {
-        title: "Home",
-        link: "/",
-        icon: <HiOutlineHome />,
-    },
-    {
-        title: "About",
-        link: "/about",
-        icon: <HiOutlineUser />,
-    },
-    {
-        title: "Services",
-        link: "/services",
-        icon: <HiOutlineDesktopComputer />,
-    },
-    {
-        title: "Projects",
-        link: "/projects",
-        icon: <HiOutlinePhotograph />,
-    },
-    {
-        title: "Blog",
-        link: "/blog",
-        icon: <HiOutlineNewspaper />,
-    },
-    {
-        title: "Contact",
-        link: "/contact",
-        icon: <HiOutlineMail />,
-    },
-];
-
-const NavBar = () => {
+const NavBar: React.FC<{ data: T_NavbarData[] }> = ({ data }) => {
     const { isMobile } = useWindowDimensions();
     const path = usePathname();
 
@@ -77,13 +31,19 @@ const NavBar = () => {
 
     return (
         <Nav>
-            {isMobile && <NavItem item={navbar_data[0]} />}
+            {isMobile && <NavItem item={data[0]} onClick={handleClose} />}
 
             <NavList style={isMobile ? style : undefined}>
-                {navbar_data.map(
+                {data.map(
                     (item: T_NavbarData, i: number) =>
                         (!isMobile || (isMobile && i != 0)) && (
-                            <NavItem key={item.title} item={item} list={true} active={path != "/" && path === item.link} />
+                            <NavItem
+                                key={item.title}
+                                item={item}
+                                list={true}
+                                active={path != "/" && path === item.link}
+                                onClick={handleClose}
+                            />
                         )
                 )}
             </NavList>
@@ -97,20 +57,23 @@ const NavBar = () => {
     );
 };
 
-const NavItem = ({
-    item,
-    list,
-    button,
-    active,
-}: {
+type T_NavItem = {
     item: T_NavbarData;
     list?: boolean;
     button?: boolean;
     active?: boolean;
-}) => {
+    onClick?: () => void;
+};
+
+const NavItem = ({ item, list, button, active, onClick }: T_NavItem) => {
     return (
         <NavListItem as={list ? "li" : "div"}>
-            <NavListButton as={button ? "button" : Link} href={button ? undefined : item.link} $active={active}>
+            <NavListButton
+                as={button ? "button" : Link}
+                href={button ? undefined : item.link}
+                $active={active}
+                onClick={onClick}
+            >
                 {item.icon}
                 <p>{item.title}</p>
             </NavListButton>
