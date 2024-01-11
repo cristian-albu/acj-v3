@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "@/lib/registry";
+import NavBar from "@/shared/navigation/NavBar";
+import Footer from "@/shared/navigation/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body className={inter.className}>
-                <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+                <StyledComponentsRegistry>
+                    <NavBar />
+                    {children}
+                    <Footer />
+                </StyledComponentsRegistry>
             </body>
         </html>
     );
