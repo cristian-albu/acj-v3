@@ -1,6 +1,7 @@
 "use client";
-import React, { ChangeEvent, Dispatch, MouseEventHandler, SetStateAction, useId, useRef, useState } from "react";
+import React, { ChangeEvent, useId, useRef, useState } from "react";
 import styled from "styled-components";
+import { T_OptionCallback, options } from "./ToolbarOptions";
 
 const EditorForm = styled.form`
     width: 100%;
@@ -26,7 +27,7 @@ const Toolbar = styled.div`
     color: #fff;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 1rem;
     padding: 1rem;
     border-bottom: 1px solid white;
@@ -45,55 +46,38 @@ const Option = styled.button`
     }
 `;
 
-export type T_OptionCallback = (value: string, cursor: number, setValue: Dispatch<SetStateAction<string>>) => void;
-
-export type T_Option = {
-    name: string;
-    callback: T_OptionCallback;
-};
-
-const addLinkCallback: T_OptionCallback = (value, cursor, setValue) => {
-    const link = prompt("Enter link");
-
-    const linkName = prompt("Enter link name");
-
-    if (link) {
-        const newValue = value.slice(0, cursor) + `[${link}](${linkName})` + value.slice(cursor);
-
-        setValue(newValue);
-    }
-};
-
-const options: T_Option[] = [{ name: "Add link", callback: addLinkCallback }];
-
 const MarkdownEditor = () => {
     const toolbarId = useId();
     const editorId = useId();
     const editorRef = useRef<HTMLTextAreaElement | null>(null);
 
     const [value, setValue] = useState("");
-    const [cursor, setCursor] = useState(0);
+    const [cursor, setCursor] = useState({ start: 0, end: 0 });
+
+    const handleMouseUpCapture = () => {
+        if (editorRef.current) {
+            setCursor({
+                start: editorRef.current.selectionStart,
+                end: editorRef.current.selectionEnd,
+            });
+        }
+    };
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value);
     };
 
-    const handleMouseUp: MouseEventHandler<HTMLTextAreaElement> = (e) => {
-        if (editorRef.current) {
-            const selection = editorRef.current.selectionStart;
-
-            setCursor(selection);
-        }
+    const handleOptionClick = (callback: T_OptionCallback) => {
+        const newVal = callback(value, cursor);
+        newVal && setValue(newVal);
     };
-
-    console.log(value);
 
     return (
         <>
             <EditorForm onSubmit={(e) => e.preventDefault()}>
                 <Toolbar id={toolbarId}>
                     {options.map((e) => (
-                        <Option key={e.name} onClick={() => e.callback(value, cursor, setValue)}>
+                        <Option key={e.name} onClick={() => handleOptionClick(e.callback)}>
                             {e.name}
                         </Option>
                     ))}
@@ -103,7 +87,7 @@ const MarkdownEditor = () => {
                     ref={editorRef}
                     value={value}
                     onChange={handleChange}
-                    onMouseUpCapture={handleMouseUp}
+                    onMouseUpCapture={handleMouseUpCapture}
                 />
             </EditorForm>
         </>
