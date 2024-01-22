@@ -3,3 +3,5 @@ export const BREAKPOINTS = {
     tablet: 768,
     mobile: 480,
 };
+
+export const MAX_WIDTH = 900;
