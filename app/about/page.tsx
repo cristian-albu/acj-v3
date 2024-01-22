@@ -1,5 +1,6 @@
 "use server";
-import AboutView from "@/views/about-view/AboutView";
+
+import AboutView from "@/views/about-view";
 import React from "react";
 
 const AboutPage = () => {
