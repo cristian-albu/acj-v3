@@ -1,6 +1,7 @@
 "use server";
 import { getProjectData, getSlugs } from "@/lib/queries";
-import ProjectView from "@/views/projects-view/ProjectView";
+import ProjectView from "@/views/projects-view/project";
+
 import { notFound } from "next/navigation";
 import React from "react";
 

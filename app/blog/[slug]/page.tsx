@@ -1,6 +1,7 @@
 "use server";
 import { getPostData, getSlugs } from "@/lib/queries";
-import PostView from "@/views/blog-view/PostView";
+import PostView from "@/views/blog-view/post";
+
 import { notFound } from "next/navigation";
 import React from "react";
 

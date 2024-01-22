@@ -1,5 +1,6 @@
 "use server";
-import ContactView from "@/views/contact-view/ContactView";
+
+import ContactView from "@/views/contact-view";
 import React from "react";
 
 const ContactPage = () => {

@@ -1,6 +1,7 @@
 "use server";
 import { getServiceData, getSlugs } from "@/lib/queries";
-import ServiceView from "@/views/services-view/ServiceView";
+import ServiceView from "@/views/services-view/service";
+
 import { notFound } from "next/navigation";
 import React from "react";
 

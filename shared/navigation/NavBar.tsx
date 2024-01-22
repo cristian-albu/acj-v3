@@ -1,5 +1,4 @@
 "use client";
-import useWindowDimensions from "@/lib/utils/useWindowDimensions";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -13,6 +12,7 @@ import {
     HiOutlineMail,
 } from "react-icons/hi";
 import { Nav, NavList, NavListButton, NavListItem } from "./styled";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
 
 type T_NavbarData = {
     title: string;

@@ -1,5 +1,6 @@
 "use server";
-import ServicesView from "@/views/services-view/ServicesView";
+
+import ServicesView from "@/views/services-view";
 import React from "react";
 
 const ServicesPage = () => {

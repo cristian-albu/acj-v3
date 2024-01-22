@@ -1,6 +1,6 @@
 "use server";
 
-import BlogView from "@/views/blog-view/BlogView";
+import BlogView from "@/views/blog-view";
 import React from "react";
 
 const BlogPage = () => {

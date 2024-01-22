@@ -1,7 +1,8 @@
 "use server";
-import HomeView from "@/views/home-view/HomeView";
+
 import React from "react";
 import db from "@/lib/pg";
+import HomeView from "@/views/home-view";
 
 const HomePage = async () => {
     const res = await db.query("SELECT * FROM test");
