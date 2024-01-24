@@ -22,3 +22,9 @@ ol,
 li {
     list-style: none;
 }
+
+svg polyline,
+svg line,
+svg path {
+    transition: all 3s ease-in-out;
+}

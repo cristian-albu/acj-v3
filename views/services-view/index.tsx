@@ -1,13 +1,8 @@
 "use client";
 import React from "react";
-import ProjectCalculator from "./ProjectCalculator";
 
 const ServicesView = () => {
-    return (
-        <div>
-            <ProjectCalculator />
-        </div>
-    );
+    return <div>services</div>;
 };
 
 export default ServicesView;
